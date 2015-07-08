@@ -1,8 +1,13 @@
 require "satriani/version"
 require "satriani/application"
-require "satriani/request_controller"
-require "rack"
 
 module Satriani
 
+  def self.define(&block)
+    @instance = Satriani::Application.new(&block)
+  end
+
+  def self.instance
+    @instance
+  end
 end
