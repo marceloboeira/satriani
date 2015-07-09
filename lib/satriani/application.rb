@@ -74,7 +74,7 @@ module Satriani
     end
 
     def param(p, default = nil)
-      lambda { request[p] || default }
+      lambda { req[p] || default }
     end
 
     def header(p, default = nil)
