@@ -126,15 +126,7 @@ module Satriani
         res.write s
       end
     end
-
-    # render_template is responsible to rendering of template files,
-    # you can configure a relative template path, apply a context processors
-    # and return a response to the browser
-    # examples:
-    # render_template({template: 'home.html.erb'})
-    # render_template({template: 'hello.html.erb'}, context: {name: 'kewer'})
-    # render_template({template: 'hello.html.erb'}, context: {name: 'kewer'},
-    #                  {template_root: 'template'})
+    
     def render_template(options={})
       template_root = options[:template_root] || 'template'
       template = options[:template]
@@ -147,20 +139,10 @@ module Satriani
       res.write(output)
     end
 
-    # render_write is responsible to emmit a
-    # text/html response to the browser
-    # example:
-    # render_template('Hello, world!')
     def render_write(options={})
       res.write(options[:text])
     end
 
-    # The render function is responsible to abstract many options
-    # like templating, context processors and text rendering
-    # examples:
-    # render template: 'home.html.erb'
-    # render template: 'lucky.html.erb', context: {numbers: [10, 12, 42, 101]}
-    # render text: "Odelay!"
     def render(options)
       template = options[:template]
 
