@@ -3,6 +3,7 @@
 # @see http://github.com/chneukirchen/rum
 
 require "rack"
+require 'tilt/erb'
 
 class Rack::Response
   def redirect(target, status = 302)
@@ -11,7 +12,7 @@ class Rack::Response
   end
 end
 
-module Satriani 
+module Satriani
   class Application
     attr_reader :env, :req, :res
 
@@ -121,8 +122,34 @@ module Satriani
     end
 
     def print(*args)
-      args.each do |s| 
-        res.write s 
+      args.each do |s|
+        res.write s
+      end
+    end
+    
+    def render_template(options={})
+      template_root = options[:template_root] || 'template'
+      template = options[:template]
+      context = options[:context]
+
+      file_path = File.join(template_root, template)
+      template_file = Tilt::ERBTemplate.new(file_path)
+      output = template_file.render(Object.new, context)
+
+      res.write(output)
+    end
+
+    def render_write(options={})
+      res.write(options[:text])
+    end
+
+    def render(options)
+      template = options[:template]
+
+      if template
+        render_template(options)
+      else
+        render_write(options)
       end
     end
   end
