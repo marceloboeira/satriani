@@ -126,9 +126,12 @@ module Satriani
         res.write s
       end
     end
-    
-    def render_template(options={})
-      template_root = options[:template_root] || 'template'
+
+    def render_template(options)
+      # TODO: Permit the default template location be same directory as
+      # the application file, but keeping possible to change this
+      # without need to repeat many times the template_root param
+      template_root = options[:template_root] || "."
       template = options[:template]
       context = options[:context]
 
@@ -139,16 +142,17 @@ module Satriani
       res.write(output)
     end
 
-    def render_write(options={})
+    def render_write(options)
       res.write(options[:text])
     end
 
     def render(options)
       template = options[:template]
+      text = options[:text]
 
       if template
         render_template(options)
-      else
+      elsif text
         render_write(options)
       end
     end
