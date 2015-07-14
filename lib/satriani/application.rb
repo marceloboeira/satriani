@@ -127,7 +127,7 @@ module Satriani
       end
     end
 
-    def render_template(options)
+    def render_template(options={})
       # TODO: Permit the default template location be same directory as
       # the application file, but keeping possible to change this
       # without need to repeat many times the template_root param
@@ -142,7 +142,7 @@ module Satriani
       res.write(output)
     end
 
-    def render_write(options)
+    def render_write(options={})
       res.write(options[:text])
     end
 
