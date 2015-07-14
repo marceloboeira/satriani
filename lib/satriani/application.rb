@@ -128,10 +128,7 @@ module Satriani
     end
 
     def render_template(options={})
-      # TODO: Permit the default template location be same directory as
-      # the application file, but keeping possible to change this
-      # without need to repeat many times the template_root param
-      template_root = options[:template_root] || "."
+      template_root = options[:template_root] || "templates"
       template = options[:template]
       context = options[:context]
 
