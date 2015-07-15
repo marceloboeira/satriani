@@ -126,9 +126,9 @@ module Satriani
         res.write s
       end
     end
-    
+
     def render_template(options={})
-      template_root = options[:template_root] || 'template'
+      template_root = options[:template_root] || "templates"
       template = options[:template]
       context = options[:context]
 
@@ -145,10 +145,11 @@ module Satriani
 
     def render(options)
       template = options[:template]
+      text = options[:text]
 
       if template
         render_template(options)
-      else
+      elsif text
         render_write(options)
       end
     end
