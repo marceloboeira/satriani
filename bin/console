@@ -1,7 +1,0 @@
-#!/usr/bin/env ruby
-
-require "bundler/setup"
-require "satriani"
-require "irb"
-
-IRB.start
