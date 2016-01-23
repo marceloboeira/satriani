@@ -1,4 +1,4 @@
-# Satriani
+# Satriani [![Build Status](https://travis-ci.org/marceloboeira/satriani.svg?branch=master)](https://travis-ci.org/marceloboeira/satriani)
 > Web microframework for Crystal
 
 ## Installation
