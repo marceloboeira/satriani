@@ -13,10 +13,24 @@ dependencies:
 
 ## Usage
 
+**Still only a concept**
+
 ```crystal
 require "satriani"
+
+Satriani::Application.start do |app|
+  app.port = 4000
+  app.logger = MyCustomLogger.new
+
+  app.routes do
+    get :foo do
+      render :bar
+    end
+  end
+
+  app
+end
 ```
-> Coming soon
 
 ## Contributing
 
