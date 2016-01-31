@@ -1,13 +1,19 @@
 module Satriani
   class Application
-    property server
+    property :routes
 
     def initialize
-      @server = Satriani::Server.new
+      @routes = [] of Satriani::Route
+
+      @handlers = [] of HTTP::Handler
+      @handlers << HTTP::LogHandler.new
+      @handlers << Satriani::Router.new(@routes)
+
+      @server = Satriani::Server.new(@handlers)
     end
 
     def start
-      @server.start
+      @server.listen
     end
 
     def stop
