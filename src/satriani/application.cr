@@ -1,10 +1,7 @@
 module Satriani
   class Application
-    property :routes
-
     def initialize
       @routes = [] of Satriani::Route
-
       @handlers = [] of HTTP::Handler
       @handlers << HTTP::LogHandler.new
       @handlers << Satriani::Router.new(@routes)
