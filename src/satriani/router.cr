@@ -7,15 +7,13 @@ module Satriani
     def call(context)
       context.response.content_type = "text/html"
 
-      begin
-        @routes.each do |route|
-          if route.path == context.request.path
-            context.response.status_code = 200
-            output = route.block.call(context.request)
-            context.response.print(output)
+      @routes.each do |route|
+        if route.path == context.request.path
+          context.response.status_code = 200
+          output = route.block.call(context.request)
+          context.response.print(output)
 
-            return context.response
-          end
+          return context.response
         end
       end
 
