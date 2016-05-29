@@ -1,3 +1,5 @@
+require "http/server"
+
 module Satriani
   class Server < HTTP::Server
     def initialize(@handlers : Array(HTTP::Handler))

@@ -1,3 +1,5 @@
+require "http/server"
+
 module Satriani
   class Router < HTTP::Handler
     def initialize(@routes : Array(Satriani::Route)); end
