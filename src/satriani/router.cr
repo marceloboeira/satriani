@@ -1,6 +1,6 @@
 module Satriani
   class Router < HTTP::Handler
-    def initialize(@routes); end
+    def initialize(@routes : Array(Satriani::Route)); end
 
     def call(context)
       context.response.content_type = "text/html"
