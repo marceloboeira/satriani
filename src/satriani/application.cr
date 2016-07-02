@@ -1,7 +1,7 @@
 module Satriani
   class Application
-    @handlers : Array(HTTP::Handler)
-    @routes : Array(Satriani::Route)
+    property handlers : Array(HTTP::Handler)
+    property routes : Array(Satriani::Route)
 
     def initialize(routes : Array(Satriani::Route))
       @routes = routes
