@@ -13,11 +13,13 @@ module Satriani
           output = route.block.call(context.request)
           context.response.print(output)
 
-          return context.response
+          return context
         end
       end
 
-      return context.response
+      context.response.status_code = 404
+
+      return context
     end
   end
 end
