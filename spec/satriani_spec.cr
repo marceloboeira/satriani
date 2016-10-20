@@ -1,37 +1,40 @@
 require "./spec_helper"
 require "http/client"
 
-describe Satriani do
-  let(routes) do
-    [
-      Satriani::Route.new("/joe-satriani/always-with-me-always-with-you") {|request| "1987" },
-      Satriani::Route.new("/joe-satriani/flying-in-a-blue-dream") {|request| "1989" },
-    ]
-  end
-
-  let(application) do
-    Satriani::Application.new(routes)
-  end
-
-  before do
-    Thread.new { application.start }
-  end
-
+module SpecHelper
   def get(path)
     HTTP::Client.get("http://localhost:8000#{path}")
   end
+end
+
+include SpecHelper
+
+spawn do
+  routes = [
+    Satriani::Route.new("/joe-satriani/always-with-me-always-with-you") {|request| "1987" },
+    Satriani::Route.new("/joe-satriani/flying-in-a-blue-dream") {|request| "1989" },
+  ]
+
+  Satriani::Application.new(routes).start
+end
+
+# ensure the server has started before connection attempt
+sleep 0.1
+
+describe Satriani do
 
   context "with a valid route" do
     it "returns success" do
       response = get("/joe-satriani/always-with-me-always-with-you")
 
-      expect(response.status_code).to eq(200)
+      response.status_code.should eq(200)
     end
 
     it "renders the content" do
       response = get("/joe-satriani/always-with-me-always-with-you")
 
-      expect(response.body).to eq("1987")
+
+      response.body.should eq("1987")
     end
   end
 
@@ -39,7 +42,7 @@ describe Satriani do
     it "returns not found" do
       response = get("/invalid")
 
-      expect(response.status_code).to eq(404)
+      response.status_code.should eq(404)
     end
   end
 end

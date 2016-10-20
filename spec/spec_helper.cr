@@ -1,4 +1,3 @@
-require "spec2"
+require "spec"
 require "../src/satriani"
 
-include Spec2::GlobalDSL
