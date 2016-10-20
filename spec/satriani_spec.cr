@@ -1,13 +1,7 @@
 require "./spec_helper"
-require "http/client"
+require "./support/http"
 
-module SpecHelper
-  def get(path)
-    HTTP::Client.get("http://localhost:8000#{path}")
-  end
-end
-
-include SpecHelper
+include HTTPHelper
 
 spawn do
   routes = [
