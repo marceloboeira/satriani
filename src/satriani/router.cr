@@ -1,7 +1,9 @@
 require "http/server"
 
 module Satriani
-  class Router < HTTP::Handler
+  class Router
+    include HTTP::Handler
+
     def initialize(@routes : Array(Satriani::Route)); end
 
     def call(context)
@@ -19,7 +21,7 @@ module Satriani
 
       context.response.status_code = 404
 
-      return context
+      call_next(context)
     end
   end
 end
