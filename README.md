@@ -13,25 +13,20 @@ dependencies:
     github: marceloboeira/satriani
 ```
 
-## Usage
+## Example
 
-**Still only a concept**
+In the future it will be easier to create your app with a proper DSL, for now:
 
 ```crystal
-require "satriani"
+require "../src/satriani"
 
-Satriani::Application.start do |app|
-  app.port = 4000
-  app.logger = MyCustomLogger.new
-
-  app.routes do
-    get :foo do
-      render :bar
-    end
+routes = [
+  Satriani::Route.new("/hello-world") do |request|
+    "hello-world"
   end
+]
 
-  app
-end
+Satriani::Application.new(routes).start
 ```
 
 ## Contributing
