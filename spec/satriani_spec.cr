@@ -1,7 +1,4 @@
 require "./spec_helper"
-require "./support/http"
-
-include HTTPHelper
 
 spawn do
   routes = [
@@ -16,16 +13,17 @@ end
 sleep 0.1
 
 describe Satriani do
+  http = HTTP::Client.new("0.0.0.0", 8000)
 
   context "with a valid route" do
     it "returns success" do
-      response = get("/joe-satriani/always-with-me-always-with-you")
+      response = http.get("/joe-satriani/always-with-me-always-with-you")
 
       response.status_code.should eq(200)
     end
 
     it "renders the content" do
-      response = get("/joe-satriani/always-with-me-always-with-you")
+      response = http.get("/joe-satriani/always-with-me-always-with-you")
 
 
       response.body.should eq("1987")
@@ -34,7 +32,7 @@ describe Satriani do
 
   context "with a invalid route" do
     it "returns not found" do
-      response = get("/invalid")
+      response = http.get("/invalid")
 
       response.status_code.should eq(404)
     end
