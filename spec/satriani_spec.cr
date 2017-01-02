@@ -10,7 +10,7 @@ spawn do
 end
 
 # ensure the server has started before connection attempt
-sleep 0.1
+sleep 0.001
 
 describe Satriani do
   http = HTTP::Client.new("0.0.0.0", 8000)
